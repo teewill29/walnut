@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Play on Phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1613}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#1A1613;color:#EDE4D3;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+<header style="display:flex;align-items:center;justify-content:space-between;padding:52px 12px 8px">
+<span style="font-family:Fraunces,serif;font-size:22px;font-weight:600">Walnut</span>
+<button type="button" style="min-height:44px;padding:0 14px;border-radius:10px;background:transparent;border:1px solid #4A3D31;color:#EDE4D3;font-size:14px;cursor:pointer">New game</button>
+</header>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:0 8px;min-height:0">
+<div style="display:flex;align-items:center;gap:10px;padding:6px 6px">
+<div style="width:34px;height:34px;border-radius:50%;background:#2E2018;border:2px solid #C9A45C;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:15px;color:#C9A45C" aria-hidden="true">M</div>
+<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">Bot · Medium</div><div style="font-size:12px;color:#A89A86">~1200 Elo</div></div>
+<span style="font-size:12px;color:#A89A86">Waiting on you</span>
+</div>
+<div style="background-color:#3A2213;background-image:repeating-linear-gradient(92deg,rgba(0,0,0,.18) 0 2px,transparent 2px 9px);padding:5px;border-radius:6px;box-shadow:0 12px 28px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,220,170,.12)">
+<div role="img" aria-label="Board after 6. O-O O-O, White to move" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));width:364px;height:364px">
+<sc-for list="{{squares}}" as="sq" hint-placeholder-count="64"><div style="position:relative;display:flex;align-items:center;justify-content:center;{{sq.bg}}"><span style="position:absolute;top:2px;left:3px;font-size:9px;font-weight:600;{{sq.lc}}">{{sq.rl}}</span><span style="position:absolute;bottom:1px;right:3px;font-size:9px;font-weight:600;{{sq.lc}}">{{sq.fl}}</span><span style="font-family:'Noto Sans Symbols 2','Segoe UI Symbol',serif;font-size:34px;line-height:1;{{sq.pstyle}}">{{sq.glyph}}</span></div></sc-for>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;padding:6px 6px">
+<div style="width:34px;height:34px;border-radius:50%;background:#EDE4D3;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:15px;color:#1A1613" aria-hidden="true">T</div>
+<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">You</div><div style="font-size:12px;color:#A89A86">White</div></div>
+<span style="font-size:13px;font-weight:600;color:#C9A45C">Your move</span>
+</div>
+<ol aria-label="Moves" style="list-style:none;margin:0;padding:4px 2px;display:flex;gap:6px;overflow-x:auto;font-size:13px;font-variant-numeric:tabular-nums">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="6"><li style="flex:none;padding:7px 10px;border-radius:8px;white-space:nowrap;{{c.style}}">{{c.t}}</li></sc-for>
+</ol>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<button type="button" style="min-height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;font-size:14px;cursor:pointer">Take back</button>
+<button type="button" onClick="{{flip}}" style="min-height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;font-size:14px;cursor:pointer">Flip</button>
+<button type="button" style="min-height:44px;border-radius:10px;background:#241E19;border:1px solid #5A3A33;color:#EFA294;font-size:14px;cursor:pointer">Resign</button>
+</div>
+</div>
+<nav aria-label="Main" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #332A22;background:#1F1A16;padding:6px 8px 30px">
+<a href="Phone.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;min-height:48px;justify-content:center;text-decoration:none;font-size:11px;font-weight:600;color:#C9A45C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 12h18M12 3v18"></path></svg>Play</a>
+<a href="Review.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;min-height:48px;justify-content:center;text-decoration:none;font-size:11px;font-weight:500;color:#A89A86"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5-6 4 3 6-8 3 4"></path><path d="M3 21h18"></path></svg>Review</a>
+<a href="History.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;min-height:48px;justify-content:center;text-decoration:none;font-size:11px;font-weight:500;color:#A89A86"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>History</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { flipped: false };
+  }
+  renderVals() {
+    const fen = 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQ1RK1';
+    const G = { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟︎' };
+    const cells = [];
+    fen.split('/').forEach((row) => { for (const ch of row) { if (/\d/.test(ch)) { for (let k = 0; k < +ch; k++) cells.push(''); } else cells.push(ch); } });
+    const F = 'abcdefgh';
+    const flip = this.state.flipped;
+    let sq = cells.map((p, i) => {
+      const r = Math.floor(i / 8), c = i % 8, name = F[c] + (8 - r), light = (r + c) % 2 === 0, a = 86 + ((i * 37) % 9);
+      let bg = light
+        ? 'background-color:#E2BE8A;background-image:repeating-linear-gradient(' + a + 'deg,rgba(130,78,32,.13) 0 1px,transparent 1px 5px,rgba(130,78,32,.07) 5px 7px,transparent 7px 11px)'
+        : 'background-color:#8E5A33;background-image:repeating-linear-gradient(' + a + 'deg,rgba(45,22,8,.25) 0 1px,transparent 1px 4px,rgba(45,22,8,.14) 4px 6px,transparent 6px 10px)';
+      if (name === 'e8' || name === 'g8') bg += ';box-shadow:inset 0 0 0 999px rgba(222,178,72,.40)';
+      const white = p && p === p.toUpperCase();
+      const pstyle = !p ? '' : white
+        ? 'color:#F4E3C0;-webkit-text-stroke:1px #4A2D16;text-shadow:0 2px 2px rgba(0,0,0,.45)'
+        : 'color:#22140A;-webkit-text-stroke:.8px #0B0502;text-shadow:0 2px 2px rgba(0,0,0,.5)';
+      return { bg, glyph: p ? G[p.toLowerCase()] : '', pstyle, r, c, light };
+    });
+    if (flip) sq = sq.slice().reverse();
+    const squares = sq.map((s, idx) => {
+      const col = idx % 8, row = Math.floor(idx / 8);
+      return { bg: s.bg, glyph: s.glyph, pstyle: s.pstyle,
+        rl: col === 0 ? String(8 - s.r) : '', fl: row === 7 ? F[s.c] : '',
+        lc: s.light ? 'color:#8E5A33' : 'color:#E2BE8A' };
+    });
+    const mv = ['1. e4', 'e5', '2. Nf3', 'Nc6', '3. Bc4', 'Bc5', '4. c3', 'Nf6', '5. d3', 'd6', '6. O-O', 'O-O'];
+    const chips = mv.slice().reverse().map((t, i) => ({ t, style: i === 0 ? 'background:#2F271F;color:#C9A45C;font-weight:600' : 'background:#241E19;color:#C8BBA6' }));
+    return { squares, chips, flip: () => this.setState({ flipped: !flip }) };
+  }
+}
+</script>
+</body>
+</html>

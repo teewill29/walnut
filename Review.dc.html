@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Post-Game Review</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1613}
+a{color:#C9A45C}a:hover{color:#E2C27F}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#1A1613;color:#EDE4D3;font-family:Inter,system-ui,sans-serif;box-sizing:border-box">
+<header style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;border-bottom:1px solid #332A22">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:Fraunces,serif;font-size:26px;font-weight:600;color:#EDE4D3">Walnut</span><span style="font-size:13px;color:#A89A86">Chess trainer</span></div>
+<nav style="display:flex;flex-wrap:wrap;gap:6px" aria-label="Main">
+<a href="Main.dc.html" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;color:#A89A86">Play</a>
+<a href="Review.dc.html" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;background:#2B241E;color:#EDE4D3">Last game review</a>
+<a href="#history" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;color:#A89A86">History</a>
+</nav>
+</header>
+<div style="max-width:1280px;margin:0 auto;padding:24px 32px 0;box-sizing:border-box">
+<h1 style="margin:0;font-family:Fraunces,serif;font-size:32px;font-weight:600">Game review</h1>
+<p style="margin:6px 0 0;font-size:14px;color:#A89A86">You (White) vs Bot · Medium · Nov 24, 2026 · Lost by checkmate on move 31</p>
+</div>
+<main style="max-width:1280px;margin:0 auto;padding:20px 32px 48px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;box-sizing:border-box">
+<section style="flex:0 1 640px;min-width:0;display:flex;flex-direction:column;gap:14px" aria-label="Board at turning point">
+<div style="display:flex;gap:12px;align-items:stretch">
+<div role="img" aria-label="Evaluation bar: Black ahead by 3.2" style="width:22px;flex:none;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #3A3028">
+<div style="flex:74;background:#2A2320"></div>
+<div style="flex:26;background:#ECE0C8;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:10px;font-weight:600;color:#1A1613">−3.2</div>
+</div>
+<div style="background-color:#3A2213;background-image:repeating-linear-gradient(92deg,rgba(0,0,0,.18) 0 2px,transparent 2px 9px),repeating-linear-gradient(87deg,rgba(255,200,140,.05) 0 1px,transparent 1px 13px);padding:20px 24px 16px 16px;border-radius:8px;box-shadow:0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,220,170,.12);display:grid;grid-template-columns:auto auto;gap:8px;width:fit-content;max-width:100%;box-sizing:border-box">
+<div style="display:grid;grid-template-rows:repeat(8,minmax(0,1fr));align-items:center;width:14px;text-align:center;font-size:12px;font-weight:600;color:#C9A45C">
+<sc-for list="{{ranks}}" as="r" hint-placeholder-count="8"><span>{{r.t}}</span></sc-for>
+</div>
+<div role="img" aria-label="Position before 14. Qxb7. Played move b3 to b7 in red, best move e3 to d5 in green" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));width:min(528px,70vw);aspect-ratio:1/1;box-shadow:0 0 0 2px #1E1209,0 0 0 4px rgba(201,164,92,.35)">
+<sc-for list="{{squares}}" as="sq" hint-placeholder-count="64"><div style="display:flex;align-items:center;justify-content:center;{{sq.bg}}"><span style="font-family:'Noto Sans Symbols 2','Segoe UI Symbol',serif;font-size:min(46px,6vw);line-height:1;{{sq.pstyle}}">{{sq.glyph}}</span></div></sc-for>
+</div>
+<div></div>
+<div style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));text-align:center;font-size:12px;font-weight:600;color:#C9A45C">
+<sc-for list="{{fileLabels}}" as="f" hint-placeholder-count="8"><span>{{f.t}}</span></sc-for>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-left:34px">
+<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px">
+<span style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(224,97,79,.16);color:#F29484"><span style="width:10px;height:10px;border-radius:2px;background:#D9604E"></span>Played Qxb7</span>
+<span style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(111,168,107,.16);color:#9BCF96"><span style="width:10px;height:10px;border-radius:2px;background:#62A05A"></span>Best Nd5</span>
+</div>
+<div style="display:flex;align-items:center;gap:6px">
+<button type="button" aria-label="First move" style="width:44px;height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 18l-6-6 6-6"></path><path d="M7 6v12"></path></svg></button>
+<button type="button" aria-label="Previous move" style="width:44px;height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<span style="min-width:96px;text-align:center;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums">14. Qxb7??</span>
+<button type="button" aria-label="Next move" style="width:44px;height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+<button type="button" aria-label="Last move" style="width:44px;height:44px;border-radius:10px;background:#241E19;border:1px solid #3A3028;color:#EDE4D3;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18l6-6-6-6"></path><path d="M17 6v12"></path></svg></button>
+</div>
+</div>
+</section>
+<aside style="flex:999 1 400px;min-width:0;display:flex;flex-direction:column;gap:18px">
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
+<div><div style="font-size:12px;color:#A89A86">Result</div><div style="font-family:Fraunces,serif;font-size:24px;font-weight:600;margin-top:4px">0–1</div></div>
+<div><div style="font-size:12px;color:#A89A86">Accuracy</div><div style="font-family:Fraunces,serif;font-size:24px;font-weight:600;margin-top:4px">71%</div></div>
+<div><div style="font-size:12px;color:#A89A86">Blunders</div><div style="font-family:Fraunces,serif;font-size:24px;font-weight:600;margin-top:4px;color:#F29484">1</div></div>
+<div><div style="font-size:12px;color:#A89A86">Mistakes</div><div style="font-family:Fraunces,serif;font-size:24px;font-weight:600;margin-top:4px;color:#F0A860">2</div></div>
+<div><div style="font-size:12px;color:#A89A86">Inaccuracies</div><div style="font-family:Fraunces,serif;font-size:24px;font-weight:600;margin-top:4px;color:#E2C46A">3</div></div>
+</section>
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+<h2 style="margin:0;font-family:Fraunces,serif;font-size:20px;font-weight:600">Evaluation</h2>
+<span style="font-size:12px;color:#A89A86">Light area = White ahead</span>
+</div>
+<svg viewBox="0 0 560 140" width="100%" role="img" aria-label="Evaluation graph: roughly even until move 14, then Black takes over for good" style="display:block;border-radius:8px;background:#14110F">
+<path d="{{areaPath}}" fill="#E6D8BF" fill-opacity="0.88"></path>
+<line x1="0" y1="70" x2="560" y2="70" stroke="#C9A45C" stroke-opacity="0.6" stroke-dasharray="4 4"></line>
+<line x1="{{tpX}}" y1="0" x2="{{tpX}}" y2="140" stroke="#D9604E" stroke-width="1.5"></line>
+<circle cx="{{tpX}}" cy="{{tpY}}" r="6" fill="#D9604E" stroke="#14110F" stroke-width="2"></circle>
+</svg>
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#A89A86"><span>Move 1</span><span style="color:#F29484">Move 14 · turning point</span><span>Move 30</span></div>
+</section>
+<section style="background:#2A201B;border:1px solid #6A3A31;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+<span style="font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#F29484">Turning point</span>
+<span style="font-size:13px;color:#C8BBA6;font-variant-numeric:tabular-nums">+0.8 → −3.2</span>
+</div>
+<h3 style="margin:0;font-family:Fraunces,serif;font-size:26px;font-weight:600">14. Qxb7?? <span style="font-family:Inter,sans-serif;font-size:14px;font-weight:500;color:#F29484">Blunder</span></h3>
+<div style="display:grid;grid-template-columns:96px minmax(0,1fr);row-gap:8px;font-size:14px">
+<span style="color:#A89A86">Engine best</span><span style="font-weight:600;color:#9BCF96">Nd5</span>
+<span style="color:#A89A86">Best line</span><span style="font-variant-numeric:tabular-nums">14. Nd5 Nxd5 15. Bxd5 Na5 16. Qc2</span>
+</div>
+<p style="margin:0;font-size:13px;color:#A89A86">Want the why? Copy this game below and paste it into your Coach project.</p>
+</section>
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+<h2 style="margin:0;font-family:Fraunces,serif;font-size:20px;font-weight:600">Flagged moves</h2>
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{flagged}}" as="fm" hint-placeholder-count="6"><li style="display:grid;grid-template-columns:96px 108px minmax(0,1fr) auto;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;font-size:14px;font-variant-numeric:tabular-nums;{{fm.rowBg}}"><span style="font-weight:600">{{fm.move}}</span><span style="justify-self:start;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;{{fm.chip}}">{{fm.kind}}</span><span style="color:#C8BBA6">{{fm.swing}}</span><span style="font-size:13px;color:#9BCF96">Best {{fm.best}}</span></li></sc-for>
+</ol>
+</section>
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+<h2 style="margin:0;font-family:Fraunces,serif;font-size:20px;font-weight:600">Coach export</h2>
+<span style="font-size:12px;color:#A89A86">Paste into your Claude Coach project</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button type="button" onClick="{{copy}}" style="min-height:48px;padding:0 20px;border:0;border-radius:10px;background:#C9A45C;color:#1A1613;font-weight:600;font-size:15px;cursor:pointer">{{copyLabel}}</button>
+<button type="button" style="min-height:48px;padding:0 16px;border-radius:10px;background:transparent;border:1px solid #4A3D31;color:#EDE4D3;font-size:14px;cursor:pointer">Copy PGN</button>
+<button type="button" style="min-height:48px;padding:0 16px;border-radius:10px;background:transparent;border:1px solid #4A3D31;color:#EDE4D3;font-size:14px;cursor:pointer">Download .pgn</button>
+</div>
+<pre style="margin:0;padding:14px;border-radius:8px;background:#14110F;border:1px solid #2E2620;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:1.55;color:#D6CBB8;white-space:pre-wrap;word-break:break-word;max-height:240px;overflow:auto">{{exportText}}</pre>
+</section>
+</aside>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1320,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { copied: false };
+  }
+  renderVals() {
+    const fen = 'r4rk1/pppbqppp/2np1n2/2b1p3/2B1P3/1QPPNN2/PP3PPP/R1B2RK1';
+    const G = { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟︎' };
+    const cells = [];
+    fen.split('/').forEach((row) => { for (const ch of row) { if (/\d/.test(ch)) { for (let k = 0; k < +ch; k++) cells.push(''); } else cells.push(ch); } });
+    const mark = { b3: 'red', b7: 'red', e3: 'green', d5: 'green' };
+    const F = 'abcdefgh';
+    const squares = cells.map((p, i) => {
+      const r = Math.floor(i / 8), c = i % 8, name = F[c] + (8 - r), light = (r + c) % 2 === 0, a = 86 + ((i * 37) % 9);
+      let bg = light
+        ? 'background-color:#E2BE8A;background-image:repeating-linear-gradient(' + a + 'deg,rgba(130,78,32,.13) 0 1px,transparent 1px 5px,rgba(130,78,32,.07) 5px 7px,transparent 7px 11px)'
+        : 'background-color:#8E5A33;background-image:repeating-linear-gradient(' + a + 'deg,rgba(45,22,8,.25) 0 1px,transparent 1px 4px,rgba(45,22,8,.14) 4px 6px,transparent 6px 10px)';
+      if (mark[name] === 'red') bg += ';box-shadow:inset 0 0 0 999px rgba(205,70,52,.48)';
+      if (mark[name] === 'green') bg += ';box-shadow:inset 0 0 0 999px rgba(88,150,80,.52)';
+      const white = p && p === p.toUpperCase();
+      const pstyle = !p ? '' : white
+        ? 'color:#F4E3C0;-webkit-text-stroke:1.2px #4A2D16;text-shadow:0 3px 3px rgba(0,0,0,.45)'
+        : 'color:#22140A;-webkit-text-stroke:1px #0B0502;text-shadow:0 3px 3px rgba(0,0,0,.5)';
+      return { bg: bg, glyph: p ? G[p.toLowerCase()] : '', pstyle: pstyle };
+    });
+    const ranks = ['8', '7', '6', '5', '4', '3', '2', '1'].map((t) => ({ t }));
+    const fileLabels = F.split('').map((t) => ({ t }));
+
+    const E = [0.2, 0.3, 0.3, 0.4, 0.3, 0.4, 0.5, 0.9, 0.4, 0.5, 0.7, 0.6, 0.8, -3.2, -3.0, -3.3, -3.1, -3.6, -3.5, -3.4, -3.1, -4.0, -4.2, -4.5, -5.1, -5.6, -6.8, -8.0, -9.5, -10];
+    const X = (i) => +(i * 560 / (E.length - 1)).toFixed(1);
+    const Y = (e) => +(70 - Math.max(-6, Math.min(6, e)) / 6 * 62).toFixed(1);
+    let areaPath = 'M0,140';
+    E.forEach((e, i) => { areaPath += ' L' + X(i) + ',' + Y(e); });
+    areaPath += ' L560,140 Z';
+
+    const chips = {
+      Blunder: 'background:rgba(224,97,79,.18);color:#F29484',
+      Mistake: 'background:rgba(232,145,58,.18);color:#F0A860',
+      Inaccuracy: 'background:rgba(217,180,74,.16);color:#E2C46A'
+    };
+    const flagged = [
+      ['9. Re1', 'Inaccuracy', '+0.9 → +0.4', 'd4'],
+      ['14. Qxb7??', 'Blunder', '+0.8 → −3.2', 'Nd5'],
+      ['18. Qa6', 'Inaccuracy', '−3.1 → −3.6', 'Qb3'],
+      ['22. h3', 'Inaccuracy', '−3.1 → −4.0', 'Rfe1'],
+      ['25. Rd1', 'Mistake', '−4.5 → −5.1', 'Nh4'],
+      ['27. Kh1', 'Mistake', '−5.6 → −6.8', 'Bd2']
+    ].map((f) => ({ move: f[0], kind: f[1], swing: f[2], best: f[3], chip: chips[f[1]], rowBg: f[1] === 'Blunder' ? 'background:#2F2420' : '' }));
+
+    const exportText = [
+      'GAME: 2026-11-24 | Me (White) vs Bot Medium (~1200) | Result: 0-1',
+      'OPENING: Italian Game: Giuoco Pianissimo',
+      'PGN: 1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O O-O ...',
+      '',
+      'MY MOVES FLAGGED:',
+      'Move 9 (White) | Played: Re1 | INACCURACY | Eval: +0.9 → +0.4',
+      '  FEN: …',
+      '  Best: d4 | Line: …',
+      'Move 14 (White) | Played: Qxb7 | BLUNDER | Eval: +0.8 → -3.2',
+      '  FEN: r4rk1/pppbqppp/2np1n2/2b1p3/2B1P3/1QPPNN2/PP3PPP/R1B2RK1 w - - 0 14',
+      '  Best: Nd5 | Line: 14. Nd5 Nxd5 15. Bxd5 Na5 16. Qc2',
+      '…4 more flagged moves',
+      '',
+      'SUMMARY: Accuracy 71% | Blunders 1 | Mistakes 2 | Inaccuracies 3'
+    ].join('\n');
+
+    const copy = () => {
+      try { if (navigator.clipboard) navigator.clipboard.writeText(exportText); } catch (e) {}
+      this.setState({ copied: true });
+    };
+    return {
+      squares, ranks, fileLabels, areaPath, flagged, exportText, copy,
+      tpX: X(13), tpY: Y(-3.2),
+      copyLabel: this.state.copied ? 'Copied to clipboard' : 'Copy for Coach'
+    };
+  }
+}
+</script>
+</body>
+</html>

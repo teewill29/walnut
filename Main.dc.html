@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Play vs Bot</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1613}
+a{color:#C9A45C}a:hover{color:#E2C27F}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#1A1613;color:#EDE4D3;font-family:Inter,system-ui,sans-serif;box-sizing:border-box">
+<header style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;border-bottom:1px solid #332A22">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:Fraunces,serif;font-size:26px;font-weight:600;color:#EDE4D3">Walnut</span><span style="font-size:13px;color:#A89A86">Chess trainer</span></div>
+<nav style="display:flex;flex-wrap:wrap;gap:6px" aria-label="Main">
+<a href="Main.dc.html" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;background:#2B241E;color:#EDE4D3">Play</a>
+<a href="Review.dc.html" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;color:#A89A86">Last game review</a>
+<a href="#history" style="padding:12px 14px;border-radius:8px;text-decoration:none;font-size:14px;color:#A89A86">History</a>
+</nav>
+</header>
+<main style="max-width:1280px;margin:0 auto;padding:28px 32px 48px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;box-sizing:border-box">
+<section style="flex:0 1 660px;min-width:0;display:flex;flex-direction:column;gap:14px" aria-label="Game">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#241E19;border:1px solid #3A3028;border-radius:10px">
+<div style="width:40px;height:40px;border-radius:50%;background:#2E2018;border:2px solid #C9A45C;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:18px;color:#C9A45C" aria-hidden="true">M</div>
+<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:15px">Bot · Medium</div><div style="font-size:13px;color:#A89A86">~1200 Elo · Black</div></div>
+<div style="font-size:13px;color:#A89A86;display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#6FA86B"></span>Waiting on you</div>
+</div>
+<div style="background-color:#3A2213;background-image:repeating-linear-gradient(92deg,rgba(0,0,0,.18) 0 2px,transparent 2px 9px),repeating-linear-gradient(87deg,rgba(255,200,140,.05) 0 1px,transparent 1px 13px);padding:22px 26px 18px 18px;border-radius:8px;box-shadow:0 24px 48px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,220,170,.12),inset 0 2px 0 rgba(255,220,170,.10);display:grid;grid-template-columns:auto auto;gap:8px;width:fit-content;max-width:100%;box-sizing:border-box">
+<div style="display:grid;grid-template-rows:repeat(8,minmax(0,1fr));align-items:center;width:14px;text-align:center;font-size:12px;font-weight:600;color:#C9A45C">
+<sc-for list="{{ranks}}" as="r" hint-placeholder-count="8"><span>{{r.t}}</span></sc-for>
+</div>
+<div role="img" aria-label="Board after 6. O-O O-O, White to move" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));width:min(576px,76vw);aspect-ratio:1/1;box-shadow:0 0 0 2px #1E1209,0 0 0 4px rgba(201,164,92,.35)">
+<sc-for list="{{squares}}" as="sq" hint-placeholder-count="64"><div style="display:flex;align-items:center;justify-content:center;{{sq.bg}}"><span style="font-family:'Noto Sans Symbols 2','Segoe UI Symbol',serif;font-size:min(50px,6.6vw);line-height:1;{{sq.pstyle}}">{{sq.glyph}}</span></div></sc-for>
+</div>
+<div></div>
+<div style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));text-align:center;font-size:12px;font-weight:600;color:#C9A45C">
+<sc-for list="{{fileLabels}}" as="f" hint-placeholder-count="8"><span>{{f.t}}</span></sc-for>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#241E19;border:1px solid #3A3028;border-radius:10px">
+<div style="width:40px;height:40px;border-radius:50%;background:#EDE4D3;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:18px;color:#1A1613" aria-hidden="true">T</div>
+<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:15px">You</div><div style="font-size:13px;color:#A89A86">White</div></div>
+<div style="font-size:13px;font-weight:600;color:#C9A45C">Your move</div>
+</div>
+</section>
+<aside style="flex:999 1 380px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:20px">
+<h2 style="margin:0 0 4px;font-family:Fraunces,serif;font-size:20px;font-weight:600">Opponent</h2>
+<p style="margin:0 0 14px;font-size:13px;color:#A89A86">Changes apply to your next game.</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+<sc-for list="{{levels}}" as="lv" hint-placeholder-count="4"><button type="button" onClick="{{lv.pick}}" aria-pressed="{{lv.pressed}}" style="text-align:left;padding:12px 14px;min-height:58px;border-radius:10px;cursor:pointer;color:#EDE4D3;{{lv.style}}"><div style="font-weight:600;font-size:15px">{{lv.name}}</div><div style="font-size:12px;margin-top:2px;{{lv.subStyle}}">{{lv.elo}}</div></button></sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap">
+<span style="font-size:13px;color:#A89A86">Play as</span>
+<div style="display:flex;background:#1A1613;border:1px solid #3A3028;border-radius:10px;padding:3px;gap:2px">
+<sc-for list="{{sides}}" as="sd" hint-placeholder-count="3"><button type="button" onClick="{{sd.pick}}" aria-pressed="{{sd.pressed}}" style="border:0;border-radius:8px;min-height:40px;padding:0 16px;font-size:14px;font-weight:500;cursor:pointer;{{sd.style}}">{{sd.name}}</button></sc-for>
+</div>
+</div>
+<button type="button" style="margin-top:16px;width:100%;min-height:48px;border:0;border-radius:10px;background:#C9A45C;color:#1A1613;font-weight:600;font-size:15px;cursor:pointer">Start new game</button>
+</section>
+<section style="background:#241E19;border:1px solid #3A3028;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+<h2 style="margin:0;font-family:Fraunces,serif;font-size:20px;font-weight:600">Moves</h2>
+<span style="font-size:13px;color:#A89A86">Italian Game · Giuoco Pianissimo</span>
+</div>
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;font-size:14px;font-variant-numeric:tabular-nums;max-height:250px;overflow:auto">
+<sc-for list="{{rows}}" as="row" hint-placeholder-count="6"><li style="display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);padding:7px 10px;border-radius:6px;{{row.bg}}"><span style="color:#A89A86">{{row.n}}.</span><span>{{row.w}}</span><span style="{{row.bStyle}}">{{row.b}}</span></li></sc-for>
+</ol>
+<div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:4px">
+<button type="button" style="min-height:44px;padding:0 16px;border-radius:10px;background:transparent;border:1px solid #4A3D31;color:#EDE4D3;font-size:14px;cursor:pointer">Take back</button>
+<button type="button" onClick="{{flip}}" style="min-height:44px;padding:0 16px;border-radius:10px;background:transparent;border:1px solid #4A3D31;color:#EDE4D3;font-size:14px;cursor:pointer">Flip board</button>
+<button type="button" style="min-height:44px;padding:0 16px;border-radius:10px;background:transparent;border:1px solid #5A3A33;color:#EFA294;font-size:14px;cursor:pointer;margin-left:auto">Resign</button>
+</div>
+<p style="margin:0;font-size:12px;color:#A89A86">Every move is logged. Review opens when the game ends.</p>
+</section>
+</aside>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1320,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { level: 1, side: 0, flipped: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const L = [
+      { name: 'Easy', elo: '~800 Elo' },
+      { name: 'Medium', elo: '~1200 Elo' },
+      { name: 'Hard', elo: '~1700 Elo' },
+      { name: 'Chessmaster', elo: 'Full strength' }
+    ];
+    const levels = L.map((l, i) => {
+      const on = i === s.level;
+      return { name: l.name, elo: l.elo, pressed: on, pick: () => this.setState({ level: i }),
+        style: on ? 'background:#33281C;border:1.5px solid #C9A45C' : 'background:#1A1613;border:1.5px solid #3A3028',
+        subStyle: on ? 'color:#C9A45C' : 'color:#A89A86' };
+    });
+    const sides = ['White', 'Random', 'Black'].map((n, i) => {
+      const on = i === s.side;
+      return { name: n, pressed: on, pick: () => this.setState({ side: i }),
+        style: on ? 'background:#C9A45C;color:#1A1613' : 'background:transparent;color:#C8BBA6' };
+    });
+    const fen = 'r1bq1rk1/ppp2ppp/2np1n2/2b1p3/2B1P3/2PP1N2/PP3PPP/RNBQ1RK1';
+    const G = { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟︎' };
+    const cells = [];
+    fen.split('/').forEach((row) => { for (const ch of row) { if (/\d/.test(ch)) { for (let k = 0; k < +ch; k++) cells.push(''); } else cells.push(ch); } });
+    const hl = { e8: 1, g8: 1 };
+    const F = 'abcdefgh';
+    let squares = cells.map((p, i) => {
+      const r = Math.floor(i / 8), c = i % 8, name = F[c] + (8 - r), light = (r + c) % 2 === 0, a = 86 + ((i * 37) % 9);
+      let bg = light
+        ? 'background-color:#E2BE8A;background-image:repeating-linear-gradient(' + a + 'deg,rgba(130,78,32,.13) 0 1px,transparent 1px 5px,rgba(130,78,32,.07) 5px 7px,transparent 7px 11px)'
+        : 'background-color:#8E5A33;background-image:repeating-linear-gradient(' + a + 'deg,rgba(45,22,8,.25) 0 1px,transparent 1px 4px,rgba(45,22,8,.14) 4px 6px,transparent 6px 10px)';
+      if (hl[name]) bg += ';box-shadow:inset 0 0 0 999px rgba(222,178,72,.40)';
+      const white = p && p === p.toUpperCase();
+      const pstyle = !p ? '' : white
+        ? 'color:#F4E3C0;-webkit-text-stroke:1.2px #4A2D16;text-shadow:0 3px 3px rgba(0,0,0,.45)'
+        : 'color:#22140A;-webkit-text-stroke:1px #0B0502;text-shadow:0 3px 3px rgba(0,0,0,.5)';
+      return { bg: bg, glyph: p ? G[p.toLowerCase()] : '', pstyle: pstyle };
+    });
+    let ranks = ['8', '7', '6', '5', '4', '3', '2', '1'].map((t) => ({ t }));
+    let fileLabels = F.split('').map((t) => ({ t }));
+    if (s.flipped) { squares = squares.slice().reverse(); ranks = ranks.slice().reverse(); fileLabels = fileLabels.slice().reverse(); }
+    const mv = [['e4', 'e5'], ['Nf3', 'Nc6'], ['Bc4', 'Bc5'], ['c3', 'Nf6'], ['d3', 'd6'], ['O-O', 'O-O']];
+    const rows = mv.map((m, i) => {
+      const last = i === mv.length - 1;
+      return { n: i + 1, w: m[0], b: m[1], bg: last ? 'background:#2F271F' : '', bStyle: last ? 'color:#C9A45C;font-weight:600' : '' };
+    });
+    return { levels, sides, squares, ranks, fileLabels, rows, flip: () => this.setState({ flipped: !s.flipped }) };
+  }
+}
+</script>
+</body>
+</html>
