@@ -15,6 +15,8 @@ import type { Level } from '../db/types';
 //     6 games. Medium was stronger than Hard, so both MultiPV levels were weakened:
 //     Easy → depth 4 / MultiPV 5 / temp 2.5 / blunder 0.20
 //     Medium → depth 5 / MultiPV 5 / temp 1.5 / blunder 0.08
+//     Bot-vs-bot with the new values (6 games each): Medium beat Easy 5–1, Hard beat
+//     Medium 5.5–0.5. Order is now Easy < Medium < Hard. Next: Teewill's own games.
 
 export type BotMethod =
   | { kind: 'multipv'; depth: number; multiPv: number; temperature: number; blunderChance: number }
