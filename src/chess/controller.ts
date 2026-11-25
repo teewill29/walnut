@@ -4,6 +4,7 @@ import { db } from '../db/schema';
 import { getSettings, loadSettings, setSetting, type SideChoice } from '../db/settings';
 import type { Color, Game, Level, Opening, Termination, GameResult } from '../db/types';
 import { ANALYSIS_VERSION } from '../engine/analysisConfig';
+import { analysisQueue } from '../engine/analysisQueue';
 import { chooseBotMove } from '../engine/botMove';
 import { EngineAbortedError, getEngine } from '../engine/EngineManager';
 import { ENGINE_URL } from '../engine/files';
@@ -260,6 +261,7 @@ class GameController {
     this.state = { ...this.state, game: done, botThinking: false };
     this.refresh({ over: { text }, overPanelOpen: true, announcement: text });
     this.save();
+    this.saving.then(() => analysisQueue.enqueue(done.id, true));
   }
 
   private async maybeBotMove() {

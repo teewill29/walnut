@@ -56,6 +56,7 @@ export default defineConfig({
   ],
   test: {
     include: ['tests/**/*.test.ts', 'src/**/*.test.ts'],
+    exclude: ['tests/engine/**', 'node_modules/**'], // real-Stockfish tests: npm run test:engine
     environment: 'node',
   },
 });

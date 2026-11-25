@@ -126,6 +126,8 @@ export function PlayScreen() {
 
       {s.over && s.overPanelOpen && (
         <GameOverPanel
+          gameId={game.id}
+          moveCount={game.moves.length}
           text={s.over.text}
           onNewGame={onGameOverNewGame}
           onClose={() => controller.setOverPanelOpen(false)}

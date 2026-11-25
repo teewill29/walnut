@@ -3,6 +3,7 @@ import { DesktopHeader, TabBar, TopBar } from './components/Shell';
 import { UpdateToast } from './components/UpdateToast';
 import { controller } from './chess/controller';
 import { db } from './db/schema';
+import { analysisQueue } from './engine/analysisQueue';
 import { requestPersistentStorage } from './db/persist';
 import { navState, SETTINGS_PATH, tabFor, usePath, type TabPath } from './lib/router';
 import { HistoryScreen } from './screens/History';
@@ -28,6 +29,7 @@ export function App() {
     requestPersistentStorage();
     // Resume or start the game at launch, so the bot moves even if the app opens on another tab.
     controller.start();
+    analysisQueue.resumeAll();
   }, []);
 
   return (

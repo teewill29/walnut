@@ -1,6 +1,12 @@
 import { Chess, type Square } from 'chess.js';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Chessboard, defaultPieces, type PieceDropHandlerArgs, type SquareHandlerArgs } from 'react-chessboard';
+import {
+  Chessboard,
+  defaultArrowOptions,
+  defaultPieces,
+  type PieceDropHandlerArgs,
+  type SquareHandlerArgs,
+} from 'react-chessboard';
 import { isLight, viewPos, woodStyle } from './wood';
 
 export type Orientation = 'white' | 'black';
@@ -22,7 +28,11 @@ interface Props {
   size: number;
   onMove: (uci: string) => boolean;
   ariaLabel: string;
+  /** Review: the played move in red and the engine's best in green (only green when they match). */
+  review?: { played: { from: string; to: string } | null; best: { from: string; to: string } | null };
 }
+
+type Tint = 'last' | 'played' | 'best' | null;
 
 const FILES = 'abcdefgh';
 const PROMOTION_PIECES = ['q', 'r', 'b', 'n'] as const;
@@ -99,12 +109,21 @@ export function Board(props: Props) {
   const squareRenderer = useCallback(
     ({ square, children }: SquareHandlerArgs & { children?: ReactNode }) => {
       const t = targets.get(square);
-      const highlight = square === selected || square === lastMove?.from || square === lastMove?.to;
+      const on = (m: { from: string; to: string } | null | undefined) => !!m && (square === m.from || square === m.to);
+      const review = props.review;
+      let tint: Tint = null;
+      if (review) {
+        const same = review.played && review.best && review.played.from === review.best.from && review.played.to === review.best.to;
+        if (on(review.best)) tint = 'best';
+        else if (!same && on(review.played)) tint = 'played';
+      } else if (square === selected || on(lastMove)) {
+        tint = 'last';
+      }
       const pos = viewPos(square, orientation);
       const labelColor = isLight(square) ? '#8E5A33' : '#E2BE8A';
       return (
         <div className="sq" style={woodStyle(square)}>
-          {highlight && <div className="sq-fill sq-last" />}
+          {tint && <div className={`sq-fill sq-${tint}`} />}
           {square === checkSquare && <div className="sq-fill sq-check" />}
           {showDots && t && <div className={t.capture ? 'sq-ring' : 'sq-dot'} />}
           {inside && pos.col === 0 && (
@@ -121,7 +140,7 @@ export function Board(props: Props) {
         </div>
       );
     },
-    [targets, selected, lastMove, checkSquare, showDots, orientation, inside],
+    [targets, selected, lastMove, checkSquare, showDots, orientation, inside, props.review],
   );
 
   const board = (
@@ -134,6 +153,10 @@ export function Board(props: Props) {
           showNotation: false,
           animationDurationInMs: 200,
           allowDrawingArrows: false,
+          arrows: props.review?.best
+            ? [{ startSquare: props.review.best.from, endSquare: props.review.best.to, color: '#62A05A' }]
+            : [],
+          arrowOptions: { ...defaultArrowOptions, opacity: 0.8 },
           allowDragOffBoard: false,
           allowAutoScroll: false,
           dragActivationDistance: 4,

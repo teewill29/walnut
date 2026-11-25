@@ -17,6 +17,8 @@ export interface SearchRequest {
   go: string; // e.g. "depth 8" or "movetime 800"
   multiPv: number;
   limitElo?: number; // sets UCI_LimitStrength + UCI_Elo
+  /** Clear the hash first, so the result doesn't depend on earlier searches (analysis). */
+  fresh?: boolean;
   priority: Priority;
   signal?: AbortSignal;
 }
@@ -87,6 +89,7 @@ export class EngineManager {
       } else {
         this.send('setoption name UCI_LimitStrength value false');
       }
+      if (req.fresh) this.send('ucinewgame');
       this.send(`position fen ${req.fen}`);
       this.send(`go ${req.go}`);
     });

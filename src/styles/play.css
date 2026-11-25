@@ -349,6 +349,12 @@
 .sq-last {
   background: var(--overlay-last);
 }
+.sq-played {
+  background: var(--overlay-played);
+}
+.sq-best {
+  background: var(--overlay-best);
+}
 .sq-check {
   background: radial-gradient(circle, rgba(255, 70, 45, 0.95) 0%, rgba(225, 45, 30, 0.6) 32%, rgba(200, 30, 20, 0) 72%);
 }
