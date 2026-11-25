@@ -1,0 +1,87 @@
+/* Design tokens. Values from docs/DESIGN.md, which took them from the mockups. */
+:root {
+  /* Surfaces */
+  --bg: #1a1613;
+  --surface: #241e19;
+  --surface-2: #2b241e;
+  --surface-sel: #2f271f;
+  --surface-deep: #14110f;
+  --border: #3a3028;
+  --border-strong: #4a3d31;
+  --divider: #332a22;
+
+  /* Not in the DESIGN.md table, but used in the mockups */
+  --surface-nav: #1f1a16;      /* phone tab bar (Phone.dc.html) */
+  --surface-avatar: #2e2018;   /* bot avatar */
+  --surface-level-on: #33281c; /* selected level button */
+
+  /* Text */
+  --text: #ede4d3;
+  --text-soft: #c8bba6;
+  --text-muted: #a89a86;
+
+  /* Brass */
+  --brass: #c9a45c;
+  --brass-hover: #e2c27f;
+  --on-brass: #1a1613;
+
+  /* Danger */
+  --danger-text: #efa294;
+  --danger-border: #5a3a33;
+
+  /* Classifications: text / chip background / solid */
+  --blunder-text: #f29484;
+  --blunder-bg: rgba(224, 97, 79, 0.18);
+  --blunder-solid: #d9604e;
+  --mistake-text: #f0a860;
+  --mistake-bg: rgba(232, 145, 58, 0.18);
+  --mistake-solid: #e8913a;
+  --inaccuracy-text: #e2c46a;
+  --inaccuracy-bg: rgba(217, 180, 74, 0.16);
+  --inaccuracy-solid: #d9b44a;
+  --good-text: #9bcf96;
+  --good-bg: rgba(111, 168, 107, 0.16);
+  --good-solid: #62a05a;
+
+  /* Result chips */
+  --win-text: #e2c27f;
+  --win-bg: rgba(201, 164, 92, 0.18);
+  --loss-text: #f29484;
+  --loss-bg: rgba(224, 97, 79, 0.16);
+  --draw-text: #c8bba6;
+  --draw-bg: rgba(168, 154, 134, 0.18);
+
+  /* Board */
+  --sq-light: #e2be8a;
+  --sq-dark: #8e5a33;
+  --frame: #3a2213;
+  --overlay-last: rgba(222, 178, 72, 0.4);
+  --overlay-played: rgba(205, 70, 52, 0.48);
+  --overlay-best: rgba(88, 150, 80, 0.52);
+  --legal-dot: rgba(26, 22, 19, 0.35);
+
+  /* Type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Shape */
+  --radius-card: 12px;
+  --radius-btn: 10px;
+  --radius-pill: 999px;
+  --radius-board: 8px;
+  --radius-board-phone: 6px;
+  --radius-sm: 2px;
+
+  /* Sizing */
+  --touch: 44px;
+  --btn-primary-h: 48px;
+  --content-max: 1280px;
+  --tablet-max: 640px;
+
+  /* Safe areas (notch, home indicator) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}

@@ -1,0 +1,437 @@
+/* Layout and components. Breakpoints from DESIGN.md:
+   phone < 640px, tablet 640–1023px, desktop >= 1024px. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+html,
+body {
+  margin: 0;
+  overscroll-behavior: none; /* no pull-to-refresh mid-drag */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+a {
+  color: var(--brass);
+}
+a:hover {
+  color: var(--brass-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* ---------- App frame ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg);
+}
+
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px calc(16px + var(--safe-right)) 24px calc(16px + var(--safe-left));
+}
+
+/* ---------- Shared pieces ---------- */
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--text);
+}
+.wordmark-sm {
+  font-size: 22px;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.15;
+}
+.page-sub {
+  margin-top: -14px; /* sits 6px under the title, inside the 20px column gap */
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.empty-card {
+  gap: 6px;
+}
+.muted {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch);
+  height: var(--touch);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+/* ---------- Phone / tablet top bar ---------- */
+
+.top-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(8px + var(--safe-top)) calc(12px + var(--safe-right)) 8px calc(12px + var(--safe-left));
+}
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: -6px; /* line the gear glyph up with the content edge */
+}
+
+/* ---------- Phone / tablet tab bar ---------- */
+
+.tab-bar {
+  flex: none;
+  border-top: 1px solid var(--divider);
+  background: var(--surface-nav);
+  padding: 6px calc(8px + var(--safe-right)) max(8px, var(--safe-bottom)) calc(8px + var(--safe-left));
+}
+.tab-bar-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: var(--tablet-max);
+  margin: 0 auto;
+}
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 48px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.tab-item:hover {
+  color: var(--text-soft);
+}
+.tab-item[aria-current='page'] {
+  font-weight: 600;
+  color: var(--brass);
+}
+
+/* ---------- Desktop header ---------- */
+
+.desk-header {
+  display: none;
+}
+
+/* ---------- Settings: full page on phone/tablet ---------- */
+
+.settings-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+.settings-backdrop {
+  display: none;
+}
+.settings {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+.settings-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: calc(8px + var(--safe-top)) calc(12px + var(--safe-right)) 8px calc(6px + var(--safe-left));
+}
+.settings-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.1;
+}
+.settings-close {
+  display: none;
+}
+.settings-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: var(--tablet-max);
+  margin: 0 auto;
+  padding: 8px calc(16px + var(--safe-right)) calc(24px + var(--safe-bottom)) calc(16px + var(--safe-left));
+}
+
+.about-list {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  row-gap: 8px;
+  column-gap: 12px;
+  margin: 0;
+  font-size: 14px;
+}
+.about-list dt {
+  color: var(--text-muted);
+}
+.about-list dd {
+  margin: 0;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Update toast ---------- */
+
+.toast {
+  position: fixed;
+  z-index: 60;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(76px + var(--safe-bottom));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  max-width: calc(100vw - 32px);
+  padding: 0 4px 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.toast-dot {
+  color: var(--text-muted);
+}
+.toast-action {
+  min-height: var(--touch);
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--brass);
+  font-weight: 600;
+  cursor: pointer;
+}
+.toast-action:hover {
+  color: var(--brass-hover);
+}
+
+/* ---------- Tablet: single column centered at 640px ---------- */
+
+@media (min-width: 640px) {
+  .screen-inner {
+    max-width: var(--tablet-max);
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+  .page-title {
+    font-size: 32px;
+  }
+}
+
+/* ---------- Desktop: top nav, 1280px content ---------- */
+
+@media (min-width: 1024px) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+  }
+  .screen {
+    overflow: visible;
+  }
+  .top-bar,
+  .tab-bar {
+    display: none;
+  }
+
+  .desk-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .desk-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .tagline {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .desk-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .desk-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .desk-nav-item {
+    padding: 12px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+  .desk-nav-item:hover {
+    color: var(--text);
+  }
+  .desk-nav-item[aria-current='page'] {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .screen-inner {
+    max-width: var(--content-max);
+    padding: 24px 32px 48px;
+  }
+
+  /* Settings becomes a modal */
+  .settings-layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .settings-backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .settings {
+    position: relative;
+    width: min(560px, 100%);
+    height: auto;
+    max-height: min(85vh, 760px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  }
+  .settings-head {
+    padding: 16px 12px 8px 24px;
+    justify-content: space-between;
+  }
+  .settings-back {
+    display: none;
+  }
+  .settings-close {
+    display: inline-flex;
+  }
+  .settings-title {
+    font-size: 24px;
+  }
+  .settings-body {
+    max-width: none;
+    padding: 8px 24px 24px;
+  }
+
+  .toast {
+    bottom: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
