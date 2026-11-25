@@ -2,6 +2,7 @@ import { APP_NAME, APP_TAGLINE } from '../config';
 import { openSettings, type TabPath } from '../lib/router';
 import { GearIcon, HistoryIcon, PlayIcon, ReviewIcon } from './Icons';
 import { NavLink } from './NavLink';
+import { setNewGameOpen } from '../lib/playUi';
 
 const TABS: { path: TabPath; short: string; long: string; Icon: typeof PlayIcon }[] = [
   { path: '/', short: 'Play', long: 'Play', Icon: PlayIcon },
@@ -54,11 +55,16 @@ export function DesktopHeader({ path, tab, settingsOpen }: Props) {
 }
 
 // Phone and tablet (under 1024px): top bar with wordmark and gear.
-export function TopBar({ path, settingsOpen }: Omit<Props, 'tab'>) {
+export function TopBar({ path, tab, settingsOpen }: Props) {
   return (
     <header className="top-bar">
       <span className="wordmark wordmark-sm">{APP_NAME}</span>
       <div className="top-bar-actions">
+        {tab === '/' && !settingsOpen && (
+          <button type="button" className="btn btn-secondary btn-compact" onClick={() => setNewGameOpen(true)}>
+            New game
+          </button>
+        )}
         <GearButton path={path} settingsOpen={settingsOpen} />
       </div>
     </header>

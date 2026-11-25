@@ -4,3 +4,6 @@ export const APP_NAME = 'Walnut';
 export const APP_TAGLINE = 'Chess trainer';
 export const APP_DESCRIPTION =
   'A personal chess trainer: play bots, get every game analyzed, track your progress.';
+
+// The initial on your avatar in the player strip.
+export const PLAYER_INITIAL = 'T';

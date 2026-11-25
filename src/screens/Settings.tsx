@@ -74,7 +74,7 @@ export function SettingsPanel() {
         <div className="settings-body">
           <section className="card">
             <h2 className="card-title">Game</h2>
-            <p className="muted">Sound, board and takeback options arrive with the features they control.</p>
+            <p className="muted">Sound, board and takeback options arrive in a later update.</p>
           </section>
 
           <section className="card">
@@ -88,6 +88,16 @@ export function SettingsPanel() {
               <dd>{isStandalone() ? 'Home screen app' : 'Browser tab'}</dd>
               <dt>Storage</dt>
               <dd>{persist ? STORAGE_TEXT[persist] : 'Checking…'}</dd>
+              <dt>Engine</dt>
+              <dd>
+                Stockfish 19, lite build by Nathan Rugg (stockfish.js). Free software under the{' '}
+                <a href="/engine/COPYING.txt" target="_blank" rel="noreferrer">
+                  GNU GPL v3
+                </a>
+                .
+              </dd>
+              <dt>Openings</dt>
+              <dd>Opening names from lichess-org/chess-openings (CC0).</dd>
             </dl>
           </section>
         </div>

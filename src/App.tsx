@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { DesktopHeader, TabBar, TopBar } from './components/Shell';
 import { UpdateToast } from './components/UpdateToast';
+import { controller } from './chess/controller';
 import { db } from './db/schema';
 import { requestPersistentStorage } from './db/persist';
 import { navState, SETTINGS_PATH, tabFor, usePath, type TabPath } from './lib/router';
@@ -25,12 +26,14 @@ export function App() {
   useEffect(() => {
     db.open().catch((err) => console.error('Could not open the database', err));
     requestPersistentStorage();
+    // Resume or start the game at launch, so the bot moves even if the app opens on another tab.
+    controller.start();
   }, []);
 
   return (
     <div className="app">
       <DesktopHeader path={path} tab={tab} settingsOpen={settingsOpen} />
-      <TopBar path={path} settingsOpen={settingsOpen} />
+      <TopBar path={path} tab={tab} settingsOpen={settingsOpen} />
       <main className="screen" inert={settingsOpen}>
         <Screen />
       </main>
