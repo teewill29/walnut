@@ -19,8 +19,15 @@ Claude Code will set this up in Phase 0. The usual commands:
 npm install
 npm run dev        # opens at http://localhost:5173
 npm test
+npm run test:engine   # analysis tests with real Stockfish (slower)
 npm run build      # production build into dist/
 npm run preview    # serves the build at http://localhost:4173 (the offline mode only works here, not in dev)
+```
+
+Bot strength check (bots play each other; slow):
+
+```
+MATCH=medium-hard GAMES=6 npm run calibrate
 ```
 
 ## Putting it online (Vercel, free)
