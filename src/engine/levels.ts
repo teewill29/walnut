@@ -8,7 +8,13 @@ import type { Level } from '../db/types';
 //         Hard = he mostly loses; Chessmaster = he never wins.
 //
 // Calibration log:
-//   (none yet)
+//   2026-11-25, round 1. ENGINE.md starting values: Easy depth 6 / MultiPV 5 / temp 2.0 /
+//     blunder 0.15; Medium depth 8 / MultiPV 4 / temp 0.8 / blunder 0.05.
+//     Teewill (1 game each): won Easy but it took a long grind; lost badly to Medium; Hard
+//     felt easier than Medium. Bot-vs-bot (npm run calibrate): Medium beat Hard 4.5–1.5 in
+//     6 games. Medium was stronger than Hard, so both MultiPV levels were weakened:
+//     Easy → depth 4 / MultiPV 5 / temp 2.5 / blunder 0.20
+//     Medium → depth 5 / MultiPV 5 / temp 1.5 / blunder 0.08
 
 export type BotMethod =
   | { kind: 'multipv'; depth: number; multiPv: number; temperature: number; blunderChance: number }
@@ -29,14 +35,14 @@ export const LEVELS: Record<Level, LevelConfig> = {
     label: 'Easy',
     nominalElo: 800,
     eloLabel: '~800 Elo',
-    method: { kind: 'multipv', depth: 6, multiPv: 5, temperature: 2.0, blunderChance: 0.15 },
+    method: { kind: 'multipv', depth: 4, multiPv: 5, temperature: 2.5, blunderChance: 0.2 },
   },
   medium: {
     id: 'medium',
     label: 'Medium',
     nominalElo: 1200,
     eloLabel: '~1200 Elo',
-    method: { kind: 'multipv', depth: 8, multiPv: 4, temperature: 0.8, blunderChance: 0.05 },
+    method: { kind: 'multipv', depth: 5, multiPv: 5, temperature: 1.5, blunderChance: 0.08 },
   },
   hard: {
     id: 'hard',
